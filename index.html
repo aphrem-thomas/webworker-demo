@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webworker</title>
+</head>
+<body>
+<div>
+    <div>enter principal</div>
+    <input id="princi" type="number"></input>
+</div>
+<div>
+    <div>enter interest rate</div>
+    <input id="rate" type="number"></input>
+</div>
+<div>
+    <div>enter years</div>
+    <input id="year" type="number"></input>
+</div>
+<button onclick="calcu()">"calculate"</button>
+<div class="result">
+
+</div>
+</body>
+<script>
+        function calcu(){
+            var p = document.getElementById("princi").value;
+            var n = document.getElementById("year").value;
+            var r = document.getElementById("rate").value;
+            if(window.Worker){
+                var newWorker = new Worker("./worker.js");
+                var data={
+                    p:p,
+                    n:n,
+                    r:r
+                }
+                newWorker.postMessage(data);
+                newWorker.onmessage=function(e){
+                    console.log(e);
+                }
+            }
+        }
+    </script>
+</html>
