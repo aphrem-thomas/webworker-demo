@@ -20,7 +20,7 @@
     <input id="year" type="number"></input>
 </div>
 <button onclick="calcu()">"calculate"</button>
-<div class="result">
+<div id="result" class="result">
 
 </div>
 </body>
@@ -38,7 +38,7 @@
                 }
                 newWorker.postMessage(data);
                 newWorker.onmessage=function(e){
-                    console.log(e);
+                  document.getElementById("result").innerHTML=e.data.amount;
                 }
             }
         }
